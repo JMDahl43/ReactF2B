@@ -1,15 +1,18 @@
-import Card from "../components/shared/Card"
+import Card from '../components/shared/Card'
+import { Link } from 'react-router-dom'
 
 function AboutPage() {
   return (
     <Card>
+      <div className='about-link'>
         <h1>About this Project</h1>
         <p> React App to lead feedback for a product or services.</p>
         <p>Version: 1.0.0</p>
 
         <p>
-            
+          <Link to='/'>Back to Home</Link>
         </p>
+      </div>
     </Card>
   )
 }
