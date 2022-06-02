@@ -18,4 +18,5 @@ function UserResults() {
     return <Spinner />
   }
 }
+
 export default UserResults
