@@ -2,9 +2,8 @@ import { useState } from 'react'
 import { getAuth, updateProfile } from 'firebase/auth'
 import { updateDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase.config'
-import { useNavigate, Link } from 'react-router-dom'
-import { async } from '@firebase/util'
-import {toast} from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 function Profile() {
   const auth = getAuth()
@@ -28,7 +27,7 @@ function Profile() {
       if (auth.currentUser.displayName !== name) {
         //Update display name in fb
         await updateProfile(auth.currentUser, {
-          displayName: name
+          displayName: name,
         })
 
         // Update in firestore
