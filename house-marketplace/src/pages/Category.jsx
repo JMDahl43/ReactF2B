@@ -11,7 +11,6 @@ import {
 } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
-import { async } from '@firebase/util'
 import Spinner from '../components/Spinner'
 import ListingItem from '../components/ListingItem'
 
@@ -75,7 +74,11 @@ function Category() {
           <main>
             <ul className='categoryListings'>
               {listings.map((listing) => (
-                <ListingItem listing={listing.data} id={listing.id} key={listing.id} />
+                <ListingItem
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
               ))}
             </ul>
           </main>
