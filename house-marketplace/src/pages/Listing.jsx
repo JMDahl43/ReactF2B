@@ -5,7 +5,6 @@ import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
 import shareIcon from '../assets/svg/shareIcon.svg'
-import { async } from '@firebase/util'
 import { list } from 'firebase/storage'
 
 function Listing() {
@@ -23,7 +22,6 @@ function Listing() {
       const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
-        console.log(docSnap.data())
         setListing(docSnap.data())
         setLoading(false)
       }
@@ -31,6 +29,7 @@ function Listing() {
 
     fetchListing()
   }, [navigate, params.listingId])
+
 
   if (loading) {
     return <Spinner />
@@ -66,30 +65,46 @@ function Listing() {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </div>
-        <p className="listingLocation">{listing.location}</p>
-        <p className="listingType">For {listing.type === 'rent' ? 'Rent' : 'Sale'}</p>
+        <p className='listingLocation'>{listing.location}</p>
+        <p className='listingType'>
+          For {listing.type === 'rent' ? 'Rent' : 'Sale'}
+        </p>
         {listing.offer && (
-            <p className="discountPrice">
-                ${listing.regularPrice - listing.discountedPrice} discount
-            </p>
+          <p className='discountPrice'>
+            ${listing.regularPrice - listing.discountedPrice} discount
+          </p>
         )}
 
-        <ul className="listingDetailsList">
-            <li>{listing.bedrooms > 1 ? `${listing.bedrooms} Bedrooms` : '1 Bedroom'}</li>
-            <li>{listing.bathrooms > 1 ? `${listing.bathrooms} Bathrooms` : '1 Bathroom'}</li>
-            <li>{listing.parking && 'Parking Space'}</li>
-            <li>{listing.furnished && 'Furnished'}</li>
+        <ul className='listingDetailsList'>
+          <li>
+            {listing.bedrooms > 1
+              ? `${listing.bedrooms} Bedrooms`
+              : '1 Bedroom'}
+          </li>
+          <li>
+            {listing.bathrooms > 1
+              ? `${listing.bathrooms} Bathrooms`
+              : '1 Bathroom'}
+          </li>
+          <li>{listing.parking && 'Parking Space'}</li>
+          <li>{listing.furnished && 'Furnished'}</li>
         </ul>
-        <p className="listingLocationTitle">Location</p>
+        <p className='listingLocationTitle'>Location</p>
 
         {/* MAP */}
 
         {auth.currentUser?.uid !== listing.userRef && (
-            <Link to={`/contact/${list.userRef}?listingName=${listing.name}&listingLocation=${listing.location}`} className='primaryButton'>Contact Lanlord</Link>
+          <Link
+            to={`/contact/${listing.userRef}?listingName=${listing.name}`}
+            className='primaryButton'
+          >
+            Contact Lanlord
+          </Link>
         )}
-
       </div>
     </main>
   )
 }
 export default Listing
+
+// https://stackoverflow.com/questions/67552020/how-to-fix-error-failed-to-compile-node-modules-react-leaflet-core-esm-pat
