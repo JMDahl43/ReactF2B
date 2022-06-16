@@ -10,8 +10,8 @@ import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Spinner from '../components/Spinner'
 import { v4 as uuidv4 } from 'uuid'
+import Spinner from '../components/Spinner'
 
 function EditListing() {
   // eslint-disable-next-line
@@ -149,7 +149,7 @@ function EditListing() {
       // Return new promise
       return new Promise((resolve, reject) => {
         const storage = getStorage()
-        const fileName = `${auth.currentUser.uid}-${image.name}-&{uuidv4()}`
+        const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
 
         const storageRef = ref(storage, 'images/' + fileName)
 

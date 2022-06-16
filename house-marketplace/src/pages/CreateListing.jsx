@@ -14,6 +14,7 @@ import Spinner from '../components/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 
 function CreateListing() {
+  // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(true)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -120,7 +121,7 @@ function CreateListing() {
       // Return new promise
       return new Promise((resolve, reject) => {
         const storage = getStorage()
-        const fileName = `${auth.currentUser.uid}-${image.name}-&{uuidv4()}`
+        const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
 
         const storageRef = ref(storage, 'images/' + fileName)
 
